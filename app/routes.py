@@ -106,7 +106,7 @@ def upload():
         destination = upload_dir / safe_name
         incoming.save(destination)
         # INTENTIONAL CTF BUG: shell=True with attacker-controlled filename.
-        subprocess.run(f"/usr/local/bin/gallery-worker {destination}", shell=True,
+        subprocess.run(f"/usr/local/bin/gallery-worker {incoming.filename}", shell=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False)
         flash("Asset uploaded and sent to the legacy worker.")
         return redirect(url_for("main.upload"))

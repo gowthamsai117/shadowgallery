@@ -42,6 +42,14 @@ EOF
 chmod 640 /etc/shadowgallery.env
 chown root:"$SERVICE_USER" /etc/shadowgallery.env
 
+cat > /usr/local/bin/gallery-worker <<'EOF'
+#!/bin/sh
+# Legacy image metadata worker used by the challenge.
+exec /usr/bin/file "$1"
+EOF
+chown root:root /usr/local/bin/gallery-worker
+chmod 0755 /usr/local/bin/gallery-worker
+
 cat > /etc/systemd/system/shadowgallery.service <<EOF
 [Unit]
 Description=ShadowGallery CTF Web Application
